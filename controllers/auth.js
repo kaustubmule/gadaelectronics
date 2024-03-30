@@ -1,8 +1,4 @@
 const mysql = require("mysql");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-const { promisify } = require('util');
-
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
     user: process.env.DATABASE_USER,
@@ -26,7 +22,7 @@ exports.login = async (req, res) => {
                 return res.status(500).send('An error occurred');
             }
 
-            if (!results || !(await bcrypt.compare(password, results[0].password))) {
+            if (!results || password !== results[0].password) {
                 console.log('Incorrect email or password');
                 return res.status(401).render('login', {
                     message: 'Email or Password is incorrect'
@@ -35,18 +31,6 @@ exports.login = async (req, res) => {
 
             const id = results[0].id;
 
-            const token = jwt.sign({ id }, process.env.JWT_SECRET, {
-                expiresIn: process.env.JWT_EXPIRES_IN
-            });
-
-            const cookieOptions = {
-                expires: new Date(
-                    Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
-                ),
-                httpOnly: true
-            }
-
-            res.cookie('jwt', token, cookieOptions);
             res.status(200).redirect('/');
         });
     } catch (error) {
@@ -59,8 +43,6 @@ exports.registration = async (req, res) => {
     const { username, password, confirmPassword, address, phone, email, birthdate, gender } = req.body;
 
     try {
-        const hashedPassword = await bcrypt.hash(password, 8);
-
         const results = await db.query("SELECT email FROM users WHERE email = ?", [email]);
 
         if (results.length > 0) {
@@ -73,7 +55,7 @@ exports.registration = async (req, res) => {
             });
         }
 
-        db.query("INSERT INTO users SET ?", { username, password: hashedPassword, address, phone, email, birthdate, gender }, (error, results) => {
+        db.query("INSERT INTO users SET ?", { username, password, address, phone, email, birthdate, gender }, (error, results) => {
             if (error) {
                 console.log(error)
                 return res.status(500).send("An error occurred during registration");
@@ -91,32 +73,16 @@ exports.registration = async (req, res) => {
 }
 
 exports.isLoggedIn = async (req, res, next) => {
-    if (req.cookies.jwt) {
-        try {
-            const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
-
-            db.query('SELECT * FROM users WHERE id = ?', [decoded.id], (error, result) => {
-                if (!result || error) {
-                    return next();
-                }
-
-                req.user = result[0];
-                return next();
-            });
-        } catch (error) {
-            console.log(error);
-            return next();
-        }
+    if (req.session && req.session.userId) {
+        req.user = true; // Set user to true if logged in
     } else {
-        next();
+        req.user = false; // Set user to false if not logged in
     }
+    next();
 }
 
-exports.logout = async (req, res) => {
-    res.cookie('jwt', 'logout', {
-        expires: new Date(Date.now() + 2 * 1000),
-        httpOnly: true
-    });
 
+
+exports.logout = async (req, res) => {
     res.status(200).redirect('/');
 }

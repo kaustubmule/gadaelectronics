@@ -4,12 +4,9 @@ const authController = require("../controllers/auth");
 
 router.get('/', authController.isLoggedIn, (req, res) => {
     res.render('index', {
-        user: req.user
+        user: req.user,
+        isLoggedIn: req.isLoggedIn
     });
-});
-
-router.get("/", (req, res) => {
-    res.render('index');
 });
 
 router.get("/registration", (req, res) => {
@@ -37,6 +34,6 @@ router.get('/profile', authController.isLoggedIn, (req, res) => {
     } else {
         res.redirect('/login');
     }
-})
+});
 
 module.exports = router;
