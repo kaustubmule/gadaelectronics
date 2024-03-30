@@ -3,6 +3,8 @@ const mysql = require("mysql");
 const path = require('path');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
 
 dotenv.config({
     path: './.env'
@@ -20,9 +22,16 @@ const publicDirectory = path.join(__dirname, './public');
 app.use(express.static(publicDirectory));
 
 app.use(express.urlencoded({ extended: false }));
-
 app.use(express.json());
 app.use(cookieParser());
+
+// Initialize express-session middleware
+app.use(session({
+    secret: 'your_secret_key_here',
+    resave: false,
+    saveUninitialized: false
+}));
+
 app.set('view engine', 'hbs');
 
 db.connect((error) => {
@@ -37,7 +46,7 @@ db.connect((error) => {
 app.use('/', require('./routes/pages'))
 app.use('/auth', require('./routes/auth'))
 
-
 app.listen(5000, () => {
     console.log("Server started on Port 5000");
 });
+

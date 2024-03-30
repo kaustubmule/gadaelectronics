@@ -29,7 +29,9 @@ exports.login = async (req, res) => {
                 });
             }
 
-            const id = results[0].id;
+            // Set the userId in the session
+            req.session.userId = results[0].id;
+            console.log('Logged in successfully');
 
             res.status(200).redirect('/');
         });
@@ -38,6 +40,7 @@ exports.login = async (req, res) => {
         res.status(500).send('An error occurred during login');
     }
 }
+
 
 exports.registration = async (req, res) => {
     const { username, password, confirmPassword, address, phone, email, birthdate, gender } = req.body;
@@ -74,9 +77,9 @@ exports.registration = async (req, res) => {
 
 exports.isLoggedIn = async (req, res, next) => {
     if (req.session && req.session.userId) {
-        req.user = true; // Set user to true if logged in
+        req.user = true;
     } else {
-        req.user = false; // Set user to false if not logged in
+        req.user = false;
     }
     next();
 }
