@@ -9,6 +9,18 @@ router.get('/', authController.isLoggedIn, (req, res) => {
     });
 });
 
+router.get('/products/:category', async (req, res) => {
+    const { category } = req.params;
+
+    try {
+        const products = await db.query('SELECT * FROM products WHERE category = ?', [category]);
+        res.render('products', { category, products });
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).send('An error occurred');
+    }
+});
+
 router.get("/registration", (req, res) => {
     res.render('registration');
 });

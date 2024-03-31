@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
 
-// Initialize express-session middleware
+
 app.use(session({
     secret: 'your_secret_key_here',
     resave: false,
@@ -42,7 +42,7 @@ db.connect((error) => {
     }
 })
 
-//Define routes
+
 app.use('/', require('./routes/pages'))
 app.use('/auth', require('./routes/auth'))
 

@@ -29,7 +29,7 @@ exports.login = async (req, res) => {
                 });
             }
 
-            // Set the userId in the session
+
             req.session.userId = results[0].id;
             console.log('Logged in successfully');
 
@@ -65,10 +65,10 @@ exports.registration = async (req, res) => {
             }
 
             console.log(results);
-            return res.render('registration', {
-                message: "User registered"
-            });
+            return res.redirect('/');
+
         });
+
     } catch (error) {
         console.error("Error during registration:", error);
         res.status(500).send("An error occurred during registration");
@@ -87,5 +87,11 @@ exports.isLoggedIn = async (req, res, next) => {
 
 
 exports.logout = async (req, res) => {
-    res.status(200).redirect('/');
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).send('Failed to logout');
+        }
+
+        res.redirect('/');
+    });
 }

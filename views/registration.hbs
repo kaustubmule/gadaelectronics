@@ -10,14 +10,19 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
     />
     <title>Register</title>
-
+    <script src="/validators/registration.js"></script>
   </head>
 
   <body>
+
     <div class="container">
       <div class="login-form">
         <h2>Registration</h2>
-        <form action="./auth/registration" method="POST">
+        <form
+          action="./auth/registration"
+          method="POST"
+          onsubmit="return validateform()"
+        >
           <div class="form-group">
             <label for="username">Username</label><br />
             <input type="text" id="username" name="username" /><br />

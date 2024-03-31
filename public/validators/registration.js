@@ -1,7 +1,5 @@
 function validateform() {
-    //Without regex
-    console.log("validateForm() called");
-    var name = document.getElementById('username').value;
+    var name = document.getElementById('username').value.trim();
     var pwd = document.getElementById('password').value;
     var confirmpwd = document.getElementById('confirmPassword').value;
     var address = document.getElementById('address').value;
@@ -10,23 +8,23 @@ function validateform() {
     var dob = document.getElementById('birthdate').value;
     var gender = document.getElementById('gender').value;
 
-    if (name == null || name == "") {
+    if (name === "") {
         alert("Empty Name");
         return false;
     }
-    else if (pwd == null || pwd == "") {
+    else if (pwd === "") {
         alert("Empty Password");
         return false;
     }
-    else if (confirmpwd == null || confirmpwd == "") {
+    else if (confirmpwd === "") {
         alert("Empty Confirm Password");
         return false;
     }
-    else if (pwd != confirmpwd) {
+    else if (pwd !== confirmpwd) {
         alert("Passwords do not match");
         return false;
     }
-    else if (address == null || address == "") {
+    else if (address === "") {
         alert("Enter Address");
         return false;
     }
@@ -34,27 +32,23 @@ function validateform() {
         alert("Enter full address");
         return false;
     }
-    else if (phoneno == null || phoneno == "") {
-        alert("Enter Phone Number");
+    else if (!/^\d{10}$/.test(phoneno)) {
+        alert("Phone Number should be 10-digit");
         return false;
     }
-    else if (phoneno.length != 10) {
-        alert("Phone Number shoould be 10-digit");
-        return false;
-    }
-    else if (email == null || email == "") {
+    else if (email === "") {
         alert("Empty email");
         return false;
     }
-    else if (email.indexOf('@') < 0 || email.lastIndexOf('.') < 0) {
-        alert("Invalid Email ID")
+    else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+        alert("Invalid Email ID");
         return false;
     }
-    else if (dob == null || dob == "") {
+    else if (dob === "") {
         alert("Enter DOB");
         return false;
     }
-    else if (gender == null || gender == "") {
+    else if (gender === "") {
         alert("Select Gender");
         return false;
     }
