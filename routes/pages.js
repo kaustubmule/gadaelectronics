@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const authController = require("../controllers/auth");
 const productsController = require("../controllers/products");
+const cartController = require("../controllers/cart");
 const db = require('../config/db');
 router.get('/', authController.isLoggedIn, (req, res) => {
     res.render('index', {
@@ -10,24 +11,13 @@ router.get('/', authController.isLoggedIn, (req, res) => {
     });
 });
 
-router.get('/products/:category', async (req, res) => {
-    const { category } = req.params;
-
-    try {
-        const products = await db.query('SELECT * FROM products WHERE category = ?', [category]);
-        res.render('products', { category, products });
-    } catch (error) {
-        console.error('Error fetching products:', error);
-        res.status(500).send('An error occurred');
-    }
-});
-
 router.get("/registration", (req, res) => {
     res.render('registration');
 });
 
 router.get('/products', productsController.showProducts);
 
+router.post('/cart', cartController.addToCart);
 
 router.get("/login", (req, res) => {
     res.render('login');

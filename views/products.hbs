@@ -44,5 +44,15 @@
         </div>
       {{/each}}
     </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => { const buttons =
+      document.querySelectorAll('.product-button'); buttons.forEach(button => {
+      button.addEventListener('click', async () => { const productId =
+      button.getAttribute('data-product-id'); const response = await
+      fetch('/cart', { method: 'POST', headers: { 'Content-Type':
+      'application/json' }, body: JSON.stringify({ productId }) }); if
+      (response.ok) { alert('Product added to cart!'); } else { alert('Failed to
+      add product to cart!'); } }); }); });
+    </script>
   </body>
 </html>

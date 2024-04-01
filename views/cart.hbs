@@ -27,7 +27,73 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul
+            class="navbar-nav ms-auto me-2 my-lg-0 navbar-nav-scroll"
+            style="--bs-scroll-height: 100px;"
+          >
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Products
+              </a>
+              <ul class="dropdown-menu">
+                <li><a
+                    class="dropdown-item"
+                    href="/products?category=Smartphones"
+                  >Smartphones</a></li>
+                <li><a
+                    class="dropdown-item"
+                    href="/products?category=Televisions"
+                  >Televisions</a></li>
+                <li><a
+                    class="dropdown-item"
+                    href="/products?category=Audio"
+                  >Audio</a></li>
+                <li><a
+                    class="dropdown-item"
+                    href="/products?category=Accessories"
+                  >Accessories</a></li>
+                <li><a
+                    class="dropdown-item"
+                    href="/products?category=Computer"
+                  >Computer</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#">Show All</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/aboutus">About</a>
+            </li>
+            {{#if user}}
+              <li class="nav-item"><a
+                  class="nav-link"
+                  href="/profile"
+                >Profile</a></li>
+              <li class="nav-item"><a
+                  class="nav-link"
+                  href="/auth/logout"
+                >Logout</a></li>
+            {{else}}
+              <li class="nav-item"><a
+                  class="nav-link"
+                  href="/login"
+                >Login</a></li>
+              <li class="nav-item"><a
+                  class="nav-link"
+                  href="/registration"
+                >Register</a></li>
+            {{/if}}
+            <li class="nav-item">
+              <a class="nav-link" href="/cart">Cart</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
 
