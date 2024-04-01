@@ -15,6 +15,11 @@ router.get("/registration", (req, res) => {
     res.render('registration');
 });
 
+router.get("/feedback", (req, res) => {
+    res.render('feedback');
+});
+
+
 router.get('/products', productsController.showProducts);
 
 

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Profile</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5; /* Light gray background */
+    }
+
+    .profile-container {
+      width: 500px; /* Adjust width as needed */
+      margin: 50px auto;
+      background-color: #fff; /* White container */
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+      padding: 30px;
+      display: flex; /* Arrange elements side-by-side */
+      flex-direction: column; /* Stack elements vertically */
+      align-items: center; /* Center elements horizontally */
+    }
+
+    .profile-picture {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background-color: #ddd; /* Placeholder for image */
+      margin-bottom: 20px;
+    }
+
+    .profile-name {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .profile-info {
+      text-align: center; /* Center text within info section */
+    }
+
+    .profile-info label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .profile-data {
+      padding: 10px 15px;
+      border: none; /* Remove border for minimal look */
+      border-radius: 3px;
+    }
+
+    .link-container {
+      margin-top: 20px;
+      display: grid; /* Arrange links in a grid layout */
+      grid-template-columns: repeat(2, 1fr); /* Two columns with equal width */
+      grid-gap: 20px; /* Spacing between grid items */
+      width: 100%; /* Stretch containers across full width */
+    }
+
+    .link-item {
+      text-decoration: none; /* Remove underline from links */
+      color: #333;
+      transition: color 0.2s ease-in-out; /* Smooth hover effect */
+      display: flex; /* Align link content vertically */
+      justify-content: center; /* Center content horizontally */
+      align-items: center; /* Center content vertically */
+      background-color: #fff; /* White background for links */
+      border-radius: 5px; /* Rounded corners */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+      padding: 10px 20px; /* Adjust padding as needed */
+    }
+
+    .link-item:hover {
+      color: #666;
+    }
+
+    .button-container {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+    }
+
+    button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s ease-in-out; /* Smooth hover effect */
+    }
+
+    .edit-button {
+      background-color: #ddd;
+      color: #333;
+    }
+
+    .edit-button:hover {
+      background-color: #ccc;
+    }
+
+    .delete-button {
+      background-color: #f00;
+      color: #fff;
+    }
+
+    .delete-button:hover {
+      background-color: #c00;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <img src="your_profile_picture.jpg" alt="Profile Picture" class="profile-picture">
+    <h2 class="profile-name">Kaustub Mule</h2>
+    <div class="profile-info">
+      <label for="email">Email:</label>
+      <span class="profile-data" id="email">kaustub@gmail.com</span>
+    </div>
+    <div class="profile-info">
+      <label for="phone">Phone:</label>
+      <span class="profile-data" id="phone">123-456-7890</span>
+    </div>
+    <div class="link-container">
+      <a href="your_orders.html" class="link-item">Your Orders</a>
+      <a href="change_password.html" class="link-item">Change Password</a>
+      <a href="your_cart.html" class="link-item">Your Cart</a>
+      <a href="payment_history.html" class="link-item">Payment History</a>
+    </div>
+    <div class="button-container">
+      <button class="edit-button">Edit Profile</button>
+      <button class="delete-button">Delete Account</button>
+    </div>
+  </div>
+</body>
+</html>
