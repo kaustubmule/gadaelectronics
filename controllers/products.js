@@ -13,7 +13,16 @@ exports.showProducts = async (req, res) => {
             return res.status(500).send('An error occurred');
         }
 
-        db.query('SELECT * FROM products', (error, results) => {
+        const { category } = req.query; // Assuming you're passing the category in the query string like /products?category=Smartphones
+        let query = 'SELECT * FROM products';
+        const params = [];
+
+        if (category) {
+            query += ' WHERE category = ?';
+            params.push(category);
+        }
+
+        db.query(query, params, (error, results) => {
             if (error) {
                 console.error('Error fetching products:', error);
                 return res.status(500).send('An error occurred');
