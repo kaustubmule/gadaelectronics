@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const authController = require("../controllers/auth");
-
+const productsController = require("../controllers/products");
+const db = require('../config/db');
 router.get('/', authController.isLoggedIn, (req, res) => {
     res.render('index', {
         user: req.user,
@@ -24,6 +25,9 @@ router.get('/products/:category', async (req, res) => {
 router.get("/registration", (req, res) => {
     res.render('registration');
 });
+
+router.get('/products', productsController.showProducts);
+
 
 router.get("/login", (req, res) => {
     res.render('login');
