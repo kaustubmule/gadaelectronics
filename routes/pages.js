@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const authController = require("../controllers/auth");
 const productsController = require("../controllers/products");
-const cartController = require("../controllers/cart");
+
 const db = require('../config/db');
 router.get('/', authController.isLoggedIn, (req, res) => {
     res.render('index', {
@@ -17,7 +17,7 @@ router.get("/registration", (req, res) => {
 
 router.get('/products', productsController.showProducts);
 
-router.post('/cart', cartController.addToCart);
+
 
 router.get("/login", (req, res) => {
     res.render('login');
