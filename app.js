@@ -46,7 +46,7 @@ db.connect((error) => {
 app.use('/', require('./routes/pages'))
 app.use('/auth', require('./routes/auth'))
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server started on Port ${PORT}`);
 });
