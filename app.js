@@ -46,7 +46,8 @@ db.connect((error) => {
 app.use('/', require('./routes/pages'))
 app.use('/auth', require('./routes/auth'))
 
-app.listen(8080, () => {
-    console.log("Server started on Port 5000");
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server started on Port ${PORT}`);
 });
 
